@@ -10,6 +10,60 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 0) do
+ActiveRecord::Schema.define(version: 2021_03_16_231325) do
+
+  create_table "companions", force: :cascade do |t|
+    t.integer "plant_id"
+    t.integer "companion_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "gardens", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "plant_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "grow_dates", force: :cascade do |t|
+    t.integer "plant_id"
+    t.boolean "outdoor_only"
+    t.integer "early_indoor"
+    t.integer "late_indoor"
+    t.integer "early_outdoor"
+    t.integer "late_outdoor"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "plants", force: :cascade do |t|
+    t.string "name"
+    t.string "plant_type"
+    t.string "sun_exposure"
+    t.string "difficulty"
+    t.string "description"
+    t.string "spacing"
+    t.string "video_url"
+    t.string "image_url"
+    t.string "watering"
+    t.string "growing"
+    t.string "harvest"
+    t.string "feeding"
+    t.string "other_care"
+    t.string "diseases"
+    t.string "pests"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "users", force: :cascade do |t|
+    t.string "email"
+    t.string "password_digest"
+    t.string "zipcode"
+    t.date "last_frost"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
 
 end

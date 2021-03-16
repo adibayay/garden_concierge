@@ -1,0 +1,314 @@
+<div>
+  <div>
+    <h1>
+      List of all plants
+    </h1>
+  </div>
+</div>
+
+<hr>
+
+<div>
+  <div>
+    <h2>
+      Add a new plant
+    </h2>
+
+    <form action="/insert_plant" method="post">
+      <div>
+        <label for="name_box">
+          Name
+        </label>
+
+        <input type="text" id="name_box" name="query_name">
+      </div>
+
+      <div>
+        <label for="plant_type_box">
+          Plant type
+        </label>
+
+        <input type="text" id="plant_type_box" name="query_plant_type">
+      </div>
+
+      <div>
+        <label for="sun_exposure_box">
+          Sun exposure
+        </label>
+
+        <input type="text" id="sun_exposure_box" name="query_sun_exposure">
+      </div>
+
+      <div>
+        <label for="difficulty_box">
+          Difficulty
+        </label>
+
+        <input type="text" id="difficulty_box" name="query_difficulty">
+      </div>
+
+      <div>
+        <label for="description_box">
+          Description
+        </label>
+
+        <input type="text" id="description_box" name="query_description">
+      </div>
+
+      <div>
+        <label for="spacing_box">
+          Spacing
+        </label>
+
+        <input type="text" id="spacing_box" name="query_spacing">
+      </div>
+
+      <div>
+        <label for="video_url_box">
+          Video url
+        </label>
+
+        <input type="text" id="video_url_box" name="query_video_url">
+      </div>
+
+      <div>
+        <label for="image_url_box">
+          Image url
+        </label>
+
+        <input type="text" id="image_url_box" name="query_image_url">
+      </div>
+
+      <div>
+        <label for="watering_box">
+          Watering
+        </label>
+
+        <input type="text" id="watering_box" name="query_watering">
+      </div>
+
+      <div>
+        <label for="growing_box">
+          Growing
+        </label>
+
+        <input type="text" id="growing_box" name="query_growing">
+      </div>
+
+      <div>
+        <label for="harvest_box">
+          Harvest
+        </label>
+
+        <input type="text" id="harvest_box" name="query_harvest">
+      </div>
+
+      <div>
+        <label for="feeding_box">
+          Feeding
+        </label>
+
+        <input type="text" id="feeding_box" name="query_feeding">
+      </div>
+
+      <div>
+        <label for="other_care_box">
+          Other care
+        </label>
+
+        <input type="text" id="other_care_box" name="query_other_care">
+      </div>
+
+      <div>
+        <label for="diseases_box">
+          Diseases
+        </label>
+
+        <input type="text" id="diseases_box" name="query_diseases">
+      </div>
+
+      <div>
+        <label for="pests_box">
+          Pests
+        </label>
+
+        <input type="text" id="pests_box" name="query_pests">
+      </div>
+
+      <button>
+        Create plant
+      </button>
+    </form>
+  </div>
+</div>
+
+<hr>
+<div>
+  <div>
+    <table>
+      <tr>
+        <th>
+          ID
+        </th>
+
+        <th>
+          Name
+        </th>
+
+        <th>
+          Plant type
+        </th>
+
+        <th>
+          Sun exposure
+        </th>
+
+        <th>
+          Difficulty
+        </th>
+
+        <th>
+          Description
+        </th>
+
+        <th>
+          Spacing
+        </th>
+
+        <th>
+          Video url
+        </th>
+
+        <th>
+          Image url
+        </th>
+
+        <th>
+          Watering
+        </th>
+
+        <th>
+          Growing
+        </th>
+
+        <th>
+          Harvest
+        </th>
+
+        <th>
+          Feeding
+        </th>
+
+        <th>
+          Other care
+        </th>
+
+        <th>
+          Diseases
+        </th>
+
+        <th>
+          Pests
+        </th>
+
+        <th>
+          Created at
+        </th>
+
+        <th>
+          Updated at
+        </th>
+
+        <th>
+        </th>
+      </tr>
+
+      <% @list_of_plants.each do |a_plant| %>
+      <tr>
+        <td>
+          <%= a_plant.id %>
+        </td>
+
+        <td>
+          <%= a_plant.name %>
+        </td>
+
+        <td>
+          <%= a_plant.plant_type %>
+        </td>
+
+        <td>
+          <%= a_plant.sun_exposure %>
+        </td>
+
+        <td>
+          <%= a_plant.difficulty %>
+        </td>
+
+        <td>
+          <%= a_plant.description %>
+        </td>
+
+        <td>
+          <%= a_plant.spacing %>
+        </td>
+
+        <td>
+          <%= a_plant.grow_tip %>
+        </td>
+
+        <td>
+          <%= a_plant.video_url %>
+        </td>
+
+        <td>
+          <%= a_plant.image_url %>
+        </td>
+
+        <td>
+          <%= a_plant.watering %>
+        </td>
+
+        <td>
+          <%= a_plant.growing %>
+        </td>
+
+        <td>
+          <%= a_plant.harvest %>
+        </td>
+
+        <td>
+          <%= a_plant.feeding %>
+        </td>
+
+        <td>
+          <%= a_plant.other_care %>
+        </td>
+
+        <td>
+          <%= a_plant.diseases %>
+        </td>
+
+        <td>
+          <%= a_plant.pests %>
+        </td>
+
+        <td>
+          <%= time_ago_in_words(a_plant.created_at) %> ago
+        </td>
+        <td>
+          <%= time_ago_in_words(a_plant.updated_at) %> ago
+        </td>
+
+        <td>
+          <a href="/plants/<%= a_plant.id %>">
+            Show details
+          </a>
+        </td>
+      </tr>
+      <% end %>
+    </table>
+  </div>
+</div>
+
+<hr>

@@ -1,0 +1,86 @@
+<div>
+  <div>
+    <h1>
+      Companion #<%= @the_companion.id %> details
+    </h1>
+
+    <div>
+      <div>
+        <a href="/companions">
+          Go back
+        </a>
+      </div>
+
+      <div>
+        <a href="/delete_companion/<%= @the_companion.id %>">
+          Delete companion
+        </a>
+      </div>
+    </div>
+
+    <dl>
+      <dt>
+        Plant
+      </dt>
+      <dd>
+        <%= @the_companion.plant_id %>
+      </dd>
+
+      <dt>
+        Companion
+      </dt>
+      <dd>
+        <%= @the_companion.companion_id %>
+      </dd>
+
+      <dt>
+        Created at
+      </dt>
+      <dd>
+        <%= time_ago_in_words(@the_companion.created_at) %> ago
+      </dd>
+
+      <dt>
+        Updated at
+      </dt>
+      <dd>
+        <%= time_ago_in_words(@the_companion.updated_at) %> ago
+      </dd>
+    </dl>
+  </div>
+</div>
+
+<hr>
+
+
+<div>
+  <div>
+    <h2>
+      Edit companion
+    </h2>
+
+    <form action="/modify_companion/<%= @the_companion.id %>"  method="post" >
+      <div>
+        <label for="plant_id_box">
+          Plant
+        </label>
+
+        <input type="text" id="plant_id_box" name="query_plant_id" value="<%= @the_companion.plant_id %>">
+      </div>
+
+      <div>
+        <label for="companion_id_box">
+          Companion
+        </label>
+
+        <input type="text" id="companion_id_box" name="query_companion_id" value="<%= @the_companion.companion_id %>">
+      </div>
+
+      <button>
+        Update companion
+      </button>
+    </form>
+  </div>
+</div>
+
+<hr>
