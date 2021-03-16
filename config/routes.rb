@@ -1,7 +1,6 @@
 Rails.application.routes.draw do
-
-
-
+  # Homepage
+  get("/", { :controller => "plants", :action => "index" })
   # Routes for the Companion resource:
 
   # CREATE
