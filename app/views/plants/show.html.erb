@@ -1,0 +1,206 @@
+<div>
+  <div>
+    <h1>
+      Plant #<%= @the_plant.id %> details
+    </h1>
+
+    <div>
+      <div>
+        <a href="/plants">
+          Go back
+        </a>
+      </div>
+
+      <div>
+        <a href="/delete_plant/<%= @the_plant.id %>">
+          Delete plant
+        </a>
+      </div>
+    </div>
+
+    <dl>
+      <dt>
+        Name
+      </dt>
+      <dd>
+        <%= @the_plant.name %>
+      </dd>
+
+      <dt>
+        Plant type
+      </dt>
+      <dd>
+        <%= @the_plant.plant_type %>
+      </dd>
+
+      <dt>
+        Sun exposure
+      </dt>
+      <dd>
+        <%= @the_plant.sun_exposure %>
+      </dd>
+
+      <dt>
+        Planting depth
+      </dt>
+      <dd>
+        <%= @the_plant.planting_depth %>
+      </dd>
+
+      <dt>
+        Height
+      </dt>
+      <dd>
+        <%= @the_plant.height %>
+      </dd>
+
+      <dt>
+        Spacing
+      </dt>
+      <dd>
+        <%= @the_plant.spacing %>
+      </dd>
+
+      <dt>
+        Grow tip
+      </dt>
+      <dd>
+        <%= @the_plant.grow_tip %>
+      </dd>
+
+      <dt>
+        Video url
+      </dt>
+      <dd>
+        <%= @the_plant.video_url %>
+      </dd>
+
+      <dt>
+        Image url
+      </dt>
+      <dd>
+        <%= @the_plant.image_url %>
+      </dd>
+
+      <dt>
+        Maturity
+      </dt>
+      <dd>
+        <%= @the_plant.maturity %>
+      </dd>
+
+      <dt>
+        Created at
+      </dt>
+      <dd>
+        <%= time_ago_in_words(@the_plant.created_at) %> ago
+      </dd>
+
+      <dt>
+        Updated at
+      </dt>
+      <dd>
+        <%= time_ago_in_words(@the_plant.updated_at) %> ago
+      </dd>
+    </dl>
+  </div>
+</div>
+
+<hr>
+
+
+<div>
+  <div>
+    <h2>
+      Edit plant
+    </h2>
+
+    <form action="/modify_plant/<%= @the_plant.id %>"  method="post" >
+      <div>
+        <label for="name_box">
+          Name
+        </label>
+
+        <input type="text" id="name_box" name="query_name" value="<%= @the_plant.name %>">
+      </div>
+
+      <div>
+        <label for="plant_type_box">
+          Plant type
+        </label>
+
+        <input type="text" id="plant_type_box" name="query_plant_type" value="<%= @the_plant.plant_type %>">
+      </div>
+
+      <div>
+        <label for="sun_exposure_box">
+          Sun exposure
+        </label>
+
+        <input type="text" id="sun_exposure_box" name="query_sun_exposure" value="<%= @the_plant.sun_exposure %>">
+      </div>
+
+      <div>
+        <label for="planting_depth_box">
+          Planting depth
+        </label>
+
+        <input type="text" id="planting_depth_box" name="query_planting_depth" value="<%= @the_plant.planting_depth %>">
+      </div>
+
+      <div>
+        <label for="height_box">
+          Height
+        </label>
+
+        <input type="text" id="height_box" name="query_height" value="<%= @the_plant.height %>">
+      </div>
+
+      <div>
+        <label for="spacing_box">
+          Spacing
+        </label>
+
+        <input type="text" id="spacing_box" name="query_spacing" value="<%= @the_plant.spacing %>">
+      </div>
+
+      <div>
+        <label for="grow_tip_box">
+          Grow tip
+        </label>
+
+        <input type="text" id="grow_tip_box" name="query_grow_tip" value="<%= @the_plant.grow_tip %>">
+      </div>
+
+      <div>
+        <label for="video_url_box">
+          Video url
+        </label>
+
+        <input type="text" id="video_url_box" name="query_video_url" value="<%= @the_plant.video_url %>">
+      </div>
+
+      <div>
+        <label for="image_url_box">
+          Image url
+        </label>
+
+        <input type="text" id="image_url_box" name="query_image_url" value="<%= @the_plant.image_url %>">
+      </div>
+
+      <div>
+        <label for="maturity_box">
+          Maturity
+        </label>
+
+        <input type="text" id="maturity_box" name="query_maturity" value="<%= @the_plant.maturity %>">
+      </div>
+
+      <button>
+        Update plant
+      </button>
+    </form>
+  </div>
+</div>
+
+<hr>
