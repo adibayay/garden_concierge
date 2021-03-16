@@ -1,0 +1,102 @@
+<div>
+  <div>
+    <h1>
+      List of all companions
+    </h1>
+  </div>
+</div>
+
+<hr>
+
+<div>
+  <div>
+    <h2>
+      Add a new companion
+    </h2>
+
+    <form action="/insert_companion" method="post">
+      <div>
+        <label for="plant_id_box">
+          Plant
+        </label>
+
+        <input type="text" id="plant_id_box" name="query_plant_id">
+      </div>
+
+      <div>
+        <label for="companion_id_box">
+          Companion
+        </label>
+
+        <input type="text" id="companion_id_box" name="query_companion_id">
+      </div>
+
+      <button>
+        Create companion
+      </button>
+    </form>
+  </div>
+</div>
+
+<hr>
+<div>
+  <div>
+    <table>
+      <tr>
+        <th>
+          ID
+        </th>
+
+        <th>
+          Plant
+        </th>
+
+        <th>
+          Companion
+        </th>
+
+        <th>
+          Created at
+        </th>
+
+        <th>
+          Updated at
+        </th>
+
+        <th>
+        </th>
+      </tr>
+
+      <% @list_of_companions.each do |a_companion| %>
+      <tr>
+        <td>
+          <%= a_companion.id %>
+        </td>
+
+        <td>
+          <%= a_companion.plant_id %>
+        </td>
+
+        <td>
+          <%= a_companion.companion_id %>
+        </td>
+
+        <td>
+          <%= time_ago_in_words(a_companion.created_at) %> ago
+        </td>
+        <td>
+          <%= time_ago_in_words(a_companion.updated_at) %> ago
+        </td>
+
+        <td>
+          <a href="/companions/<%= a_companion.id %>">
+            Show details
+          </a>
+        </td>
+      </tr>
+      <% end %>
+    </table>
+  </div>
+</div>
+
+<hr>

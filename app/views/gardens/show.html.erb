@@ -1,0 +1,101 @@
+<div>
+  <div>
+    <h1>
+      Garden #<%= @the_garden.id %> details
+    </h1>
+
+    <div>
+      <div>
+        <a href="/gardens">
+          Go back
+        </a>
+      </div>
+
+      <div>
+        <a href="/delete_garden/<%= @the_garden.id %>">
+          Delete garden
+        </a>
+      </div>
+    </div>
+
+    <dl>
+      <dt>
+        User
+      </dt>
+      <dd>
+        <%= @the_garden.user_id %>
+      </dd>
+
+      <dt>
+        Plant
+      </dt>
+      <dd>
+        <%= @the_garden.plant_id %>
+      </dd>
+
+      <dt>
+        Last frost
+      </dt>
+      <dd>
+        <%= @the_garden.last_frost %>
+      </dd>
+
+      <dt>
+        Created at
+      </dt>
+      <dd>
+        <%= time_ago_in_words(@the_garden.created_at) %> ago
+      </dd>
+
+      <dt>
+        Updated at
+      </dt>
+      <dd>
+        <%= time_ago_in_words(@the_garden.updated_at) %> ago
+      </dd>
+    </dl>
+  </div>
+</div>
+
+<hr>
+
+
+<div>
+  <div>
+    <h2>
+      Edit garden
+    </h2>
+
+    <form action="/modify_garden/<%= @the_garden.id %>"  method="post" >
+      <div>
+        <label for="user_id_box">
+          User
+        </label>
+
+        <input type="text" id="user_id_box" name="query_user_id" value="<%= @the_garden.user_id %>">
+      </div>
+
+      <div>
+        <label for="plant_id_box">
+          Plant
+        </label>
+
+        <input type="text" id="plant_id_box" name="query_plant_id" value="<%= @the_garden.plant_id %>">
+      </div>
+
+      <div>
+        <label for="last_frost_box">
+          Last frost
+        </label>
+
+        <input type="date" id="last_frost_box" name="query_last_frost" value="<%= @the_garden.last_frost %>">
+      </div>
+
+      <button>
+        Update garden
+      </button>
+    </form>
+  </div>
+</div>
+
+<hr>
