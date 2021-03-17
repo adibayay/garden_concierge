@@ -26,6 +26,9 @@ class Plant < ApplicationRecord
   has_many  :gardens, dependent: :destroy
   has_many  :companions, dependent: :destroy
   validates :name, presence: true
+  validates :sun_exposure, presence: true
+  validates :difficulty, presence: true
+  validates :plant_type, presence: true
   validates :name, uniqueness: true
   validates :image_url, presence: true
 end

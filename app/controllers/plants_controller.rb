@@ -13,6 +13,7 @@ class PlantsController < ApplicationController
     matching_plants = Plant.where({ :id => the_id })
 
     @the_plant = matching_plants.at(0)
+    @companions = @the_plant.companions
 
     render({ :template => "plants/show.html.erb" })
   end

@@ -29,7 +29,7 @@ class GardensController < ApplicationController
 
     if the_garden.valid?
       the_garden.save
-      redirect_to("/plants", { :notice => "Plant added to your garden successfully." })
+      redirect_to request.referrer + "#" + the_garden.plant_id.to_s
     else
       redirect_to("/plants", { :notice => "Oops,that did not work...try again." })
     end
@@ -55,7 +55,7 @@ class GardensController < ApplicationController
     the_garden = Garden.where({ :id => the_id }).at(0)
 
     the_garden.destroy
-
-    redirect_to request.referrer
+    
+    redirect_to request.referrer + "#" + the_garden.plant_id.to_s
   end
 end

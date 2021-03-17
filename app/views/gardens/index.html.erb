@@ -33,4 +33,59 @@
   </div>
 </div> 
 </div>
+
+<%all_companions = []%>
+<%plants_in_garden = []%>
+<%@list_of_gardens.each do |a_garden|%>
+  <%companions = a_garden.companions%>
+  <%plants_in_garden.append(a_garden.plant_id)%>
+      <%companions.each do |companion_pair|%>
+      <%the_id = companion_pair.companion_id%>
+      <%a_plant = Plant.where(:id => the_id).first%>
+      <%all_companions.append(a_plant.id)%>
+      <%end%>
+<%end%>
+<%all_companions%>
+<%plants_in_garden%>
+<%unique_companions = all_companions - plants_in_garden%>
+<%freq = unique_companions.inject(Hash.new(0)) { |h,v| h[v] += 1; h }%>
+<%top_3_companions = freq.sort_by { |_, v| -v }.first(3).map(&:first)%>
+
+
+<%if top_3_companions.present?%>
 <hr>
+<div>
+<h3>Top 3 recommended companion plants for your garden</h3>
+
+<%top_3_companions.each do |the_id|%>
+<%a_plant = Plant.where(:id => the_id).first%>
+
+<div>
+<div class="container">
+  <div class="row">
+      <div class="col">
+        <div class="row">
+          <a href="/plants/<%= a_plant.id %>"><%= a_plant.name %></a>
+
+      <%if @current_user.present?%>
+      <%my_garden = @current_user.gardens%>
+      <div class="col">
+      <form action="/insert_garden" method="post">
+          <input type="hidden" name="query_plant_id" value = <%= a_plant.id %>>
+        <button>
+          Add to my garden!
+        </button>
+      </form>
+      </div>
+      </div>
+
+        <div class="row">
+          <a href="/plants/<%= a_plant.id %>"><img src=<%= a_plant.image_url %> alt=<%= a_plant.name %>></a>
+        </div>
+      </div>
+  </div>
+</div> 
+</div>
+<%end%>
+<%end%>
+<%end%>

@@ -12,7 +12,7 @@
   <div class="row">
       <% @list_of_plants.each do |a_plant| %>
       <div class="col">
-        <div class="row">
+        <div class="row" id = "<%=a_plant.id%>">
           <a href="/plants/<%= a_plant.id %>"><%= a_plant.name %></a>
 
       <%if @current_user.present?%>
