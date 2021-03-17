@@ -30,4 +30,44 @@ namespace :slurp do
     puts "There are now #{Plant.count} rows in the transactions table"
   end
 
+  task grow: :environment do
+    require "csv"
+
+    csv_text = File.read(Rails.root.join("lib", "csvs", "Garden_Concierge_Master_Grow_Dates.csv"))
+    csv = CSV.parse(csv_text, :headers => true, :encoding => "ISO-8859-1")
+    count = 0
+    csv.each do |row|
+      t = GrowDate.new
+      t.early_indoor = row["early_indoor"]
+      t.late_indoor = row["late_indoor"]
+      t.early_outdoor = row["early_outdoor"]
+      t.late_outdoor = row["late_outdoor"]
+      count = count + 1
+      t.plant_id = count
+      t.outdoor_only = row["outdoor_only"]
+      
+      t.save
+      puts "#{t.plant_id} saved"
+    end
+
+    puts "There are now #{GrowDate.count} rows in the transactions table"
+  end
+
+  task companion: :environment do
+    require "csv"
+
+    csv_text = File.read(Rails.root.join("lib", "csvs", "Garden_Concierge_Master_Companions.csv"))
+    csv = CSV.parse(csv_text, :headers => true, :encoding => "ISO-8859-1")
+    count = 0
+    csv.each do |row|
+      t = Companion.new
+      t.plant_id = row["plant_id"]
+      t.companion_id = row["companion_id"]
+      
+      t.save
+      puts "#{t.plant_id} saved"
+    end
+
+    puts "There are now #{Companion.count} rows in the transactions table"
+  end
 end
