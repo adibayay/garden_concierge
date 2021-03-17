@@ -35,15 +35,13 @@ namespace :slurp do
 
     csv_text = File.read(Rails.root.join("lib", "csvs", "Garden_Concierge_Master_Grow_Dates.csv"))
     csv = CSV.parse(csv_text, :headers => true, :encoding => "ISO-8859-1")
-    count = 0
     csv.each do |row|
       t = GrowDate.new
       t.early_indoor = row["early_indoor"]
       t.late_indoor = row["late_indoor"]
       t.early_outdoor = row["early_outdoor"]
       t.late_outdoor = row["late_outdoor"]
-      count = count + 1
-      t.plant_id = count
+      t.plant_id = row["plant_id"]
       t.outdoor_only = row["outdoor_only"]
       
       t.save
