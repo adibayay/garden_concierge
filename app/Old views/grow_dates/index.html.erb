@@ -1,0 +1,164 @@
+<div>
+  <div>
+    <h1>
+      List of all grow dates
+    </h1>
+  </div>
+</div>
+
+<hr>
+
+<div>
+  <div>
+    <h2>
+      Add a new grow date
+    </h2>
+
+    <form action="/insert_grow_date" method="post">
+      <div>
+        <label for="plant_id_box">
+          Plant
+        </label>
+
+        <input type="text" id="plant_id_box" name="query_plant_id">
+      </div>
+
+      <div>
+        <input type="checkbox" id="outdoor_only_box" name="query_outdoor_only" value="1">
+
+        <label for="outdoor_only_box">Outdoor only</label>
+      </div>
+
+      <div>
+        <label for="early_indoor_box">
+          Early indoor
+        </label>
+
+        <input type="text" id="early_indoor_box" name="query_early_indoor">
+      </div>
+
+      <div>
+        <label for="late_indoor_box">
+          Late indoor
+        </label>
+
+        <input type="text" id="late_indoor_box" name="query_late_indoor">
+      </div>
+
+      <div>
+        <label for="early_outdoor_box">
+          Early outdoor
+        </label>
+
+        <input type="text" id="early_outdoor_box" name="query_early_outdoor">
+      </div>
+
+      <div>
+        <label for="late_outdoor_box">
+          Late outdoor
+        </label>
+
+        <input type="text" id="late_outdoor_box" name="query_late_outdoor">
+      </div>
+
+      <button>
+        Create grow date
+      </button>
+    </form>
+  </div>
+</div>
+
+<hr>
+<div>
+  <div>
+    <table>
+      <tr>
+        <th>
+          ID
+        </th>
+
+        <th>
+          Plant
+        </th>
+
+        <th>
+          Outdoor only
+        </th>
+
+        <th>
+          Early indoor
+        </th>
+
+        <th>
+          Late indoor
+        </th>
+
+        <th>
+          Early outdoor
+        </th>
+
+        <th>
+          Late outdoor
+        </th>
+
+        <th>
+          Created at
+        </th>
+
+        <th>
+          Updated at
+        </th>
+
+        <th>
+        </th>
+      </tr>
+
+      <% @list_of_grow_dates.each do |a_grow_date| %>
+      <tr>
+        <td>
+          <%= a_grow_date.id %>
+        </td>
+
+        <td>
+          <%= a_grow_date.plant_id %>
+        </td>
+
+        <td>
+          <%= a_grow_date.outdoor_only %>
+        </td>
+
+        <td>
+          <%= a_grow_date.early_indoor %>
+        </td>
+
+        <td>
+          <%= a_grow_date.late_indoor %>
+        </td>
+
+        <td>
+          <%= a_grow_date.early_outdoor %>
+        </td>
+
+        <td>
+          <%= a_grow_date.late_outdoor %>
+        </td>
+
+        <td>
+          <%= time_ago_in_words(a_grow_date.created_at) %> ago
+        </td>
+        <td>
+          <%= time_ago_in_words(a_grow_date.updated_at) %> ago
+        </td>
+
+        <td>
+          <a href="/grow_dates/<%= a_grow_date.id %>">
+            Show details
+          </a>
+        </td>
+      </tr>
+      <% end %>
+    </table>
+  </div>
+</div>
+
+<hr>

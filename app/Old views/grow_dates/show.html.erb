@@ -1,0 +1,146 @@
+<div>
+  <div>
+    <h1>
+      Grow date #<%= @the_grow_date.id %> details
+    </h1>
+
+    <div>
+      <div>
+        <a href="/grow_dates">
+          Go back
+        </a>
+      </div>
+
+      <div>
+        <a href="/delete_grow_date/<%= @the_grow_date.id %>">
+          Delete grow date
+        </a>
+      </div>
+    </div>
+
+    <dl>
+      <dt>
+        Plant
+      </dt>
+      <dd>
+        <%= @the_grow_date.plant_id %>
+      </dd>
+
+      <dt>
+        Outdoor only
+      </dt>
+      <dd>
+        <%= @the_grow_date.outdoor_only %>
+      </dd>
+
+      <dt>
+        Early indoor
+      </dt>
+      <dd>
+        <%= @the_grow_date.early_indoor %>
+      </dd>
+
+      <dt>
+        Late indoor
+      </dt>
+      <dd>
+        <%= @the_grow_date.late_indoor %>
+      </dd>
+
+      <dt>
+        Early outdoor
+      </dt>
+      <dd>
+        <%= @the_grow_date.early_outdoor %>
+      </dd>
+
+      <dt>
+        Late outdoor
+      </dt>
+      <dd>
+        <%= @the_grow_date.late_outdoor %>
+      </dd>
+
+      <dt>
+        Created at
+      </dt>
+      <dd>
+        <%= time_ago_in_words(@the_grow_date.created_at) %> ago
+      </dd>
+
+      <dt>
+        Updated at
+      </dt>
+      <dd>
+        <%= time_ago_in_words(@the_grow_date.updated_at) %> ago
+      </dd>
+    </dl>
+  </div>
+</div>
+
+<hr>
+
+
+<div>
+  <div>
+    <h2>
+      Edit grow date
+    </h2>
+
+    <form action="/modify_grow_date/<%= @the_grow_date.id %>"  method="post" >
+      <div>
+        <label for="plant_id_box">
+          Plant
+        </label>
+
+        <input type="text" id="plant_id_box" name="query_plant_id" value="<%= @the_grow_date.plant_id %>">
+      </div>
+
+      <div>
+        <input type="checkbox" id="outdoor_only_box" name="query_outdoor_only" value="1" <%= "checked" if @the_grow_date.outdoor_only %>>
+
+        <label for="outdoor_only_box">
+            Outdoor only
+        </label>
+      </div>
+
+      <div>
+        <label for="early_indoor_box">
+          Early indoor
+        </label>
+
+        <input type="text" id="early_indoor_box" name="query_early_indoor" value="<%= @the_grow_date.early_indoor %>">
+      </div>
+
+      <div>
+        <label for="late_indoor_box">
+          Late indoor
+        </label>
+
+        <input type="text" id="late_indoor_box" name="query_late_indoor" value="<%= @the_grow_date.late_indoor %>">
+      </div>
+
+      <div>
+        <label for="early_outdoor_box">
+          Early outdoor
+        </label>
+
+        <input type="text" id="early_outdoor_box" name="query_early_outdoor" value="<%= @the_grow_date.early_outdoor %>">
+      </div>
+
+      <div>
+        <label for="late_outdoor_box">
+          Late outdoor
+        </label>
+
+        <input type="text" id="late_outdoor_box" name="query_late_outdoor" value="<%= @the_grow_date.late_outdoor %>">
+      </div>
+
+      <button>
+        Update grow date
+      </button>
+    </form>
+  </div>
+</div>
+
+<hr>
