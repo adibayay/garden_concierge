@@ -41,7 +41,7 @@ class UserAuthenticationController < ApplicationController
     @user.email = params.fetch("query_email")
     @user.password = params.fetch("query_password")
     @user.password_confirmation = params.fetch("query_password_confirmation")
-    @user.zipcode = params.fetch("query_zipcode")
+    @user.zipcode = 60615
     @user.last_frost = params.fetch("query_last_frost")
 
     save_status = @user.save

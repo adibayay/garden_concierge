@@ -17,6 +17,5 @@ class User < ApplicationRecord
 
   has_one   :garden, dependent: :destroy
 
-  validates :zipcode, length: { minimum: 5, maximum: 5 }
   validates :last_frost, presence: true
 end
