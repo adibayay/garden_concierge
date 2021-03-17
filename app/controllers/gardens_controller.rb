@@ -1,10 +1,15 @@
 class GardensController < ApplicationController
   def index
-    matching_gardens = Garden.all
+    if @current_user.present?
 
-    @list_of_gardens = matching_gardens.order({ :created_at => :desc })
+      matching_gardens = @current_user.gardens
 
-    render({ :template => "gardens/index.html.erb" })
+      @list_of_gardens = matching_gardens.order({ :created_at => :desc })
+
+      render({ :template => "gardens/index.html.erb" })
+    else
+      redirect_to("/user_sign_in", { :notice => "Sign in to  your create your garden" })
+    end
   end
 
   def show
@@ -51,6 +56,6 @@ class GardensController < ApplicationController
 
     the_garden.destroy
 
-    redirect_to("/gardens", { :notice => "Garden deleted successfully."} )
+    redirect_to request.referrer
   end
 end

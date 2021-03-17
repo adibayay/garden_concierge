@@ -1,10 +1,14 @@
 class GrowDatesController < ApplicationController
   def index
-    matching_grow_dates = GrowDate.all
+    if @current_user.present?
+      matching_grow_dates = GrowDate.all
 
-    @list_of_grow_dates = matching_grow_dates.order({ :created_at => :desc })
+      @list_of_grow_dates = matching_grow_dates.order({ :created_at => :desc })
 
-    render({ :template => "grow_dates/index.html.erb" })
+      render({ :template => "grow_dates/index.html.erb" })
+    else
+      redirect_to("/user_sign_in", { :notice => "Sign in to  your create your custom garden plan" })
+    end
   end
 
   def show

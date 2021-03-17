@@ -15,22 +15,32 @@
         <div class="row">
           <a href="/plants/<%= a_plant.id %>"><%= a_plant.name %></a>
 
-
+      <%if @current_user.present?%>
       <%my_garden = @current_user.gardens%>
       <%if my_garden.where({:plant_id => a_plant.id}).count == 0%>
+
+      <div class="col">
       <form action="/insert_garden" method="post">
           <input type="hidden" name="query_plant_id" value = <%= a_plant.id %>>
         <button>
           Add to my garden!
         </button>
       </form>
-      <%else%>
-        <button>
-          Remove
-        </button>    
-      <%end%>
+      </div>
 
-        </div>
+      <%else%>
+      <%the_id = my_garden.where({:plant_id => a_plant.id}).first.id%>
+
+      <div class="col">
+      <form action="/delete_garden/<%=the_id%>">
+        <button>
+          Delete from my garden
+        </button>
+      </form>
+      </div>
+      <%end%>
+      <%end%>
+      </div>
 
         <div class="row">
           <a href="/plants/<%= a_plant.id %>"><img src=<%= a_plant.image_url %> alt=<%= a_plant.name %>></a>
