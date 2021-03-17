@@ -11,7 +11,7 @@
 class Garden < ApplicationRecord
   belongs_to :user
   belongs_to :plant
-  has_one  :calendar, through: :plant, source: :grow_date
+  has_one  :grow_date, through: :plant, source: :grow_date
   validates :user_id, presence: true
   validates :plant_id, presence: true
 end

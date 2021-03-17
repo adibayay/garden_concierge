@@ -15,4 +15,5 @@
 class GrowDate < ApplicationRecord
   belongs_to :plant
   has_one  :garden, through: :plant, source: :gardens
+  has_one  :user, through: :garden, source: :user
 end

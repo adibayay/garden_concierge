@@ -1,7 +1,8 @@
 class GrowDatesController < ApplicationController
   def index
     if @current_user.present?
-      matching_grow_dates = GrowDate.all
+      matching_grow_dates = @current_user.grow_dates
+      
 
       @list_of_grow_dates = matching_grow_dates.order({ :created_at => :desc })
 

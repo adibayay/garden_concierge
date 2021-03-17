@@ -16,6 +16,6 @@ class User < ApplicationRecord
   has_secure_password
 
   has_many   :gardens, dependent: :destroy
-
+  has_many :grow_dates, through: :gardens, source: :grow_date
   validates :last_frost, presence: true
 end
