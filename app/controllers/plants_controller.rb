@@ -2,7 +2,7 @@ class PlantsController < ApplicationController
   def index
     matching_plants = Plant.all
 
-    @list_of_plants = matching_plants.order({ :created_at => :desc })
+    @list_of_plants = matching_plants.order({ :name => :asc })
 
     render({ :template => "plants/index.html.erb" })
   end

@@ -15,7 +15,7 @@ class User < ApplicationRecord
   validates :email, :presence => true
   has_secure_password
 
-  has_one   :garden, dependent: :destroy
+  has_many   :gardens, dependent: :destroy
 
   validates :last_frost, presence: true
 end

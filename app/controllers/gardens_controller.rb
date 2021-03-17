@@ -19,14 +19,14 @@ class GardensController < ApplicationController
 
   def create
     the_garden = Garden.new
-    the_garden.user_id = params.fetch("query_user_id")
+    the_garden.user_id = @current_user.id
     the_garden.plant_id = params.fetch("query_plant_id")
 
     if the_garden.valid?
       the_garden.save
-      redirect_to("/gardens", { :notice => "Garden created successfully." })
+      redirect_to("/plants", { :notice => "Plant added to your garden successfully." })
     else
-      redirect_to("/gardens", { :notice => "Garden failed to create successfully." })
+      redirect_to("/plants", { :notice => "Oops,that did not work...try again." })
     end
   end
 
