@@ -1,45 +1,17 @@
-<div>
-  <div>
-    <h1>
-      My garden
-    </h1>
-  </div>
+
+<div class="p-3 mb-2 bg-dark text-center text-white mt-1">
+  <h1>
+    My garden
+  </h1>
 </div>
 
-<hr>
-<%if @current_user.present?%>
-<div>
-<div class="container">
-  <div class="row">
-      <% @list_of_gardens.each do |a_garden| %>
-      <%a_plant = a_garden.plant%>
-      <div class="col">
-        <div class="row">
-          <a href="/plants/<%= a_plant.id %>"><%= a_plant.name %></a>
-        <div class="col">
-      <form action="/delete_garden/<%=a_garden.id%>">
-        <button>
-          Delete from my garden
-        </button>
-      </form>
-        </div>
-      </div>
-      <div class="row">
-          <a href="/plants/<%= a_plant.id %>"><img src=<%= a_plant.image_url %> alt=<%= a_plant.name %>></a>
-        </div>
-      </div>
-      <%end%>
-<%end%>
-  </div>
-</div> 
-</div>
-
+<div class="p-3 mb-2 bg-light text-dark">
 <%if @current_user.present?%>
 <div class="row" >
   <% @list_of_gardens.each do |a_garden| %>
     <%a_plant = a_garden.plant%>
-    <div class="col-md-4 mb-5">
-    <div class="card border-dark mb-3" id = "<%=a_plant.id%>">
+    <div class="col m-auto">
+    <div class="card border-dark mb-3" style="width: 12rem;" id = "<%=a_plant.id%>">
       <div class="card-header">
         <h4 class="card-title"><a href="/plants/<%= a_plant.id %>"><%= a_plant.name %></a></h4>
       </div>
@@ -47,14 +19,15 @@
       <a href="/plants/<%= a_plant.id %>"><img src=<%= a_plant.image_url %> class="card-img-top"></a>
 
       <div class="card-body">
-        <%the_id = my_garden.where({:plant_id => a_plant.id}).first.id%>
-        <a href="/delete_garden/<%=the_id%>" class="btn btn-outline-danger">Remove</a>
+          <%my_garden = @current_user.gardens%>
+            <%the_id = my_garden.where({:plant_id => a_plant.id}).first.id%>
+            <a href="/delete_garden/<%=the_id%>" class="btn btn-outline-danger">Remove</a>
       </div>
     </div>
     </div>
   <%end%>
 </div>
-<%end%>
+</div>
 
 
 <%all_companions = []%>
@@ -68,8 +41,6 @@
       <%all_companions.append(a_plant.id)%>
       <%end%>
 <%end%>
-<%all_companions%>
-<%plants_in_garden%>
 <%unique_companions = all_companions - plants_in_garden%>
 <%freq = unique_companions.inject(Hash.new(0)) { |h,v| h[v] += 1; h }%>
 <%top_3_companions = freq.sort_by { |_, v| -v }.first(3).map(&:first)%>
@@ -77,38 +48,34 @@
 
 <%if top_3_companions.present?%>
 <hr>
-<div>
-<h3>Top 3 recommended companion plants for your garden</h3>
 
-<%top_3_companions.each do |the_id|%>
-<%a_plant = Plant.where(:id => the_id).first%>
 
-<div>
-<div class="container">
-  <div class="row">
-      <div class="col">
-        <div class="row">
-          <a href="/plants/<%= a_plant.id %>"><%= a_plant.name %></a>
+<div class="p-3 mb-2 bg-info text-white"><h5>Like to grow more? These are your garden's top companion crops:</h5></div>
+<div class="p-3 mb-2 bg-light text-dark">
 
-      <%if @current_user.present?%>
-      <%my_garden = @current_user.gardens%>
-      <div class="col">
-      <form action="/insert_garden" method="post">
-          <input type="hidden" name="query_plant_id" value = <%= a_plant.id %>>
-        <button>
-          Add to my garden!
-        </button>
-      </form>
-      </div>
+<div class="row" >
+  <%top_3_companions.each do |the_id|%>
+    <%a_plant = Plant.where(:id => the_id).first%>
+    <div class="col-md-4 mb-5">
+    <div class="card border-dark mb-3" id = "<%=a_plant.id%>">
+      <div class="card-header">
+        <h4 class="card-title"><a href="/plants/<%= a_plant.id %>"><%= a_plant.name %></a></h4>
       </div>
 
-        <div class="row">
-          <a href="/plants/<%= a_plant.id %>"><img src=<%= a_plant.image_url %> alt=<%= a_plant.name %>></a>
-        </div>
+      <a href="/plants/<%= a_plant.id %>"><img src=<%= a_plant.image_url %> class="card-img-top"></a>
+
+      <div class="card-body">
+          <%my_garden = @current_user.gardens%>
+          <%if my_garden.where({:plant_id => a_plant.id}).count == 0%>
+            <form action="/insert_garden" method="post">
+              <input type="hidden" name="query_plant_id" value = <%= a_plant.id %>>
+              <button class="btn btn-outline-success">Add to my garden!</button>
+            </form>
+          <%end%>
       </div>
-  </div>
-</div> 
+    </div>
+    </div>
+  <%end%>
+<%end%>
+<%end%>
 </div>
-<%end%>
-<%end%>
-<%end%>

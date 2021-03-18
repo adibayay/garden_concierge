@@ -1,80 +1,58 @@
-<div>
-  <div>
+<div class="p-3 mb-2 bg-dark text-white text-center mt-1">
     <h1>
       My calendar
     </h1>
-  </div>
 </div>
+
 <hr>
+
 <%last_frost = @current_user.last_frost%>
-<div>
+<div class = "col-sm bg-primary text-center text-white"><i class="far fa-snowflake fa-3x"></i>
   <div>
-    <table border =1>
-      <tr>
-        <th rowspan = 2>
-        Crop
-        </th>
+    <form action="/modify_user" method="post">
+        <label for="last_frost_box"> <h3>My last frost date</h3></label>
+        <div>
+        <input id="last_frost_box" type="date" name="query_last_frost" value="<%= @current_user.last_frost %>">
 
-        <th colspan = 2>
-          Start seeds indoor
-        </th>
-        <th colspan = 2>
-          Transplant or sow outdoors
-        </th>
-      </tr>
-      <tr>
-
-        <th>
-          Early
-        </th>
-
-        <th>
-          Late
-        </th>
-
-        <th>
-          Early
-        </th>
-
-        <th>
-          Late
-        </th>
-      </tr>
-
-      <% @list_of_grow_dates.each do |a_grow_date| %>
-      <tr>
-
-        <td>
-          <%= a_grow_date.plant.name %>
-        </td>
-        <%if a_grow_date.outdoor_only%>
-        <td>*</td>
-        <td>*</td>
-        <%else%>
-        <td>
-          <% d = last_frost - 7*a_grow_date.early_indoor.to_i %>
-          <%= d.strftime("%b%e")%>
-        </td>
-
-        <td>
-          <% d = last_frost - 7*a_grow_date.late_indoor.to_i %>
-          <%= d.strftime("%b%e")%>
-        </td>
-        <%end%>
-        <td>
-          <% d = last_frost - 7*a_grow_date.early_outdoor.to_i %>
-          <%= d.strftime("%b%e")%>
-        </td>
-
-        <td>
-          <% d = last_frost - 7*a_grow_date.late_outdoor.to_i %>
-          <%= d.strftime("%b%e")%>
-        </td>
-
-      </tr>
-      <% end %>
-    </table>
+      <button type="submit" class="btn btn-secondary mb-2">
+        Update
+      </button>
+      </div>
+    </form>
   </div>
-</div>
-<p>* best sown directly outdoors in the garden </p>
+ </div>
+
 <hr>
+
+<table class="table">
+  <thead class="thead-light">
+    <tr>
+      <th rowspan = 2>Crop</th>
+      <th colspan = 2>Start seeds indoor <i class="fas fa-home"></i></th>
+      <th colspan = 2>Transplant or sow outdoors <i class="fas fa-seedling"></i></th>
+    </tr>
+    <tr>
+      <th scope="col">Early</th>
+      <th scope="col">Late</th>
+      <th scope="col">Early</th>
+      <th scope="col">Late</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @list_of_grow_dates.each do |a_grow_date| %>
+    <tr>
+        <th scope="row"><%= a_grow_date.plant.name %></th>
+        <%if a_grow_date.outdoor_only%>
+          <td><i class="fas fa-seedling"></i></td>
+          <td><i class="fas fa-seedling"></i></td>
+        <%else%>
+        <td><% d = last_frost - 7*a_grow_date.early_indoor.to_i %><%= d.strftime("%b%e")%></td>
+        <td><% d = last_frost - 7*a_grow_date.late_indoor.to_i %><%= d.strftime("%b%e")%></td>
+        <%end%>
+        <td><% d = last_frost - 7*a_grow_date.early_outdoor.to_i %><%= d.strftime("%b%e")%></td>
+        <td><% d = last_frost - 7*a_grow_date.late_outdoor.to_i %><%= d.strftime("%b%e")%></td>
+    </tr>
+    <%end%>
+  </tbody>
+</table>
+<p><i class="fas fa-seedling"></i> best sown directly outdoors in the garden </p>

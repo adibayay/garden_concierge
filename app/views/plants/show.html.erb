@@ -1,56 +1,32 @@
-<div>
-  <div>
-    <h1>
-      <%= @the_plant.name %>
-    </h1>
-
-    <div>
-      <%if @current_user.present?%>
-      <%my_garden = @current_user.gardens%>
-      <%if my_garden.where({:plant_id => @the_plant.id}).count == 0%>
-      <form action="/insert_garden" method="post">
-          <input type="hidden" name="query_plant_id" value = <%= @the_plant.id %>>
-        <button>
-          Add to my garden!
-        </button>
-      </form>
-
-      <%else%>
-      <%the_id = my_garden.where({:plant_id => @the_plant.id}).first.id%>
-      <form action="/delete_garden/<%=the_id%>">
-        <button>
-          Delete from my garden
-        </button>
-      </form>
-      <%end%>
-      <%end%>
+<div class="card border-dark mb-3 mt-2">
+  <div class="row no-gutters">
+    <div class="col-md-4">
+      <img src=<%= @the_plant.image_url %> class="card-img-top">
     </div>
+    <div class="col-md-8">
+      <div class="card-body">
+        <h2 class="card-title"><%= @the_plant.name %></h2>
+        <p class="card-text"><%= @the_plant.description %></p>
+        <p class="card-text p-3 mb-2 bg-warning text-dark"><i class="fas fa-sun fa-2x"></i> Requires <%= @the_plant.sun_exposure %></p>
+        <p class="card-text p-3 mb-2 bg-info text-white"><i class="fas fa-leaf fa-2x"></i> Recommended for <%= @the_plant.difficulty %> gardeners</p>
+              <%if @current_user.present?%>
+                <%my_garden = @current_user.gardens%>
+                <%if my_garden.where({:plant_id => @the_plant.id}).count == 0%>
+                  <form action="/insert_garden" method="post">
+                    <input type="hidden" name="query_plant_id" value = <%= @the_plant.id %>>
+                    <button class="btn btn-outline-success btn-lg btn-block">Add to my garden!</button>
+                  </form>
+                <%else%>
+                  <%the_id = my_garden.where({:plant_id => @the_plant.id}).first.id%>
+                  <a href="/delete_garden/<%=the_id%>" class="btn btn-outline-danger btn-lg btn-block">Remove</a>
+                <%end%>
+              <%end%>
+      </div>
+    </div>
+  </div>
+</div>
 
-    <dl>
-      <dd>
-        <img src = <%= @the_plant.image_url %>>
-      </dd>
-
-      <dt>
-        Sun requirement
-      </dt>
-      <dd>
-        <%= @the_plant.sun_exposure %>
-      </dd>
-
-      <dt>
-        Difficulty
-      </dt>
-      <dd>
-        <%= @the_plant.difficulty %>
-      </dd>
-
-      <%if @the_plant.description.present?%>
-      <dd>
-        <%= @the_plant.description %>
-      </dd>
-      <%end%>
-
+<div>
       <% if @the_plant.video_url.present?%>
       <dt>
         Growing Guide
@@ -135,7 +111,6 @@
       <%end%>
 
     </dl>
-  </div>
 </div>
 
 <%if @companions.present?%>

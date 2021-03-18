@@ -1,14 +1,13 @@
-<div class = mt-2>
+<div class="p-3 mt-2 bg-light text-dark form-group">
 <%= search_form_for @q do |f| %>
   <div>
     <%= f.text_field :name_cont, :placeholder => "Enter a crop name" %>
-
   <%= f.submit :class => "btn btn-primary" %>
   </div>
-  
-  <a href="/plants">Clear filters</a>
+  <a href="/plants">Clear</a>
 <% end %>
 </div>
+
 <hr>
 
 <div class="row" >

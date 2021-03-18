@@ -61,16 +61,12 @@ class UserAuthenticationController < ApplicationController
 
   def update
     @user = @current_user
-    @user.email = params.fetch("query_email")
-    @user.password = params.fetch("query_password")
-    @user.password_confirmation = params.fetch("query_password_confirmation")
-    @user.zipcode = params.fetch("query_zipcode")
     @user.last_frost = params.fetch("query_last_frost")
     
     if @user.valid?
       @user.save
 
-      redirect_to("/", { :notice => "User account updated successfully."})
+      redirect_to("/grow_dates", { :notice => "Last frost date updated!"})
     else
       render({ :template => "user_authentication/edit_profile_with_errors.html.erb" })
     end
