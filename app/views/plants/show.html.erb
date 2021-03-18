@@ -1,11 +1,11 @@
 <div class="card border-dark mb-3 mt-2">
   <div class="row no-gutters">
-    <div class="col-md-4">
-      <img src=<%= @the_plant.image_url %> class="card-img-top">
+    <div class="col-md-4 mt-2">
+      <img src=<%= @the_plant.image_url %> class="card-img-center">
     </div>
-    <div class="col-md-8">
+    <div class="col-md-8 p-1">
       <div class="card-body">
-        <h2 class="card-title"><%= @the_plant.name %></h2>
+        <h1 class="card-title"><%= @the_plant.name %></h1>
         <p class="card-text"><%= @the_plant.description %></p>
         <p class="card-text p-3 mb-2 bg-warning text-dark"><i class="fas fa-sun fa-2x"></i> Requires <%= @the_plant.sun_exposure %></p>
         <p class="card-text p-3 mb-2 bg-info text-white"><i class="fas fa-leaf fa-2x"></i> Recommended for <%= @the_plant.difficulty %> gardeners</p>
@@ -115,62 +115,43 @@
 
 <%if @companions.present?%>
 <hr>
-<div>
-<h3>Companion plants</h3>
-
-<%@companions.each do |companion_pair|%>
-<%the_id = companion_pair.companion_id%>
-<%a_plant = Plant.where(:id => the_id).first%>
-
-<div>
-<div class="container">
-  <div class="row">
-      <div class="col">
-        <div class="row">
-          <a href="/plants/<%= a_plant.id %>"><%= a_plant.name %></a>
-
-      <%if @current_user.present?%>
-      <%my_garden = @current_user.gardens%>
-      <%if my_garden.where({:plant_id => a_plant.id}).count == 0%>
-
-      <div class="col">
-      <form action="/insert_garden" method="post">
-          <input type="hidden" name="query_plant_id" value = <%= a_plant.id %>>
-        <button>
-          Add to my garden!
-        </button>
-      </form>
+<div class="p-3 mb-2 bg-info text-white"><h3><%= @the_plant.name %> best companions</h3></div>
+<div class="p-3 mb-2 bg-light text-dark">
+<div class="row" >
+  <%@companions.each do |companion_pair|%>
+  <%the_id = companion_pair.companion_id%>
+  <%a_plant = Plant.where(:id => the_id).first%>
+    <div class="col-md-4 mb-5">
+    <div class="card border-dark mb-3" id = "<%=a_plant.id%>">
+      <div class="card-header">
+        <h4 class="card-title"><a href="/plants/<%= a_plant.id %>"><%= a_plant.name %></a></h4>
       </div>
 
-      <%else%>
-      <%the_id = my_garden.where({:plant_id => a_plant.id}).first.id%>
+      <a href="/plants/<%= a_plant.id %>"><img src=<%= a_plant.image_url %> class="card-img-top"></a>
 
-      <div class="col">
-      <form action="/delete_garden/<%=the_id%>">
-        <button>
-          Delete from my garden
-        </button>
-      </form>
+      <div class="card-body">
+        <%if @current_user.present?%>
+          <%my_garden = @current_user.gardens%>
+          <%if my_garden.where({:plant_id => a_plant.id}).count == 0%>
+            <form action="/insert_garden" method="post">
+              <input type="hidden" name="query_plant_id" value = <%= a_plant.id %>>
+              <button class="btn btn-outline-success">Add to my garden!</button>
+            </form>
+          <%else%>
+            <%the_id = my_garden.where({:plant_id => a_plant.id}).first.id%>
+            <a href="/delete_garden/<%=the_id%>" class="btn btn-outline-danger">Remove</a>
+          <%end%>
+        <%end%>
       </div>
-      <%end%>
-      </div>
-
-        <div class="row">
-          <a href="/plants/<%= a_plant.id %>"><img src=<%= a_plant.image_url %> alt=<%= a_plant.name %>></a>
-        </div>
-      </div>
-      <% end %>
-  </div>
-</div> 
+    </div>
+    </div>
+  <%end%>
 </div>
-
-
-<%end%>
-</div>
-<hr>
 <%end%>
 
+<%if @current_user.present?%>
 <%if @current_user.id == 1%>
+
 <div>
   <div>
     <h2>
@@ -304,4 +285,5 @@
     </form>
   </div>
 </div>
+<%end%>
 <%end%>
