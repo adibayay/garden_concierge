@@ -1,6 +1,7 @@
 class PlantsController < ApplicationController
   def index
-    matching_plants = Plant.all
+    @q = Plant.ransack(params[:q])
+    matching_plants = @q.result
 
     @list_of_plants = matching_plants.order({ :name => :asc })
 
@@ -79,5 +80,14 @@ class PlantsController < ApplicationController
     the_plant.destroy
 
     redirect_to("/plants", { :notice => "Plant deleted successfully."} )
+  end
+
+  def search
+    @plants = Plant.all
+    @search = params["search"]
+    if @search.present?
+      @name = @search["name"]
+      @plants = Plant.where(name: @name)
+    end
   end
 end

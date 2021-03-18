@@ -1,54 +1,41 @@
-<div>
+<div class = mt-2>
+<%= search_form_for @q do |f| %>
   <div>
-    <h1>
-      Library of plants
-    </h1>
+    <%= f.text_field :name_cont, :placeholder => "Enter a crop name" %>
+
+  <%= f.submit :class => "btn btn-primary" %>
   </div>
+  
+  <a href="/plants">Clear filters</a>
+<% end %>
 </div>
-
 <hr>
-<div>
-<div class="container">
-  <div class="row">
-      <% @list_of_plants.each do |a_plant| %>
-      <div class="col">
-        <div class="row" id = "<%=a_plant.id%>">
-          <a href="/plants/<%= a_plant.id %>"><%= a_plant.name %></a>
 
-      <%if @current_user.present?%>
-      <%my_garden = @current_user.gardens%>
-      <%if my_garden.where({:plant_id => a_plant.id}).count == 0%>
-
-      <div class="col">
-      <form action="/insert_garden" method="post">
-          <input type="hidden" name="query_plant_id" value = <%= a_plant.id %>>
-        <button>
-          Add to my garden!
-        </button>
-      </form>
+<div class="row" >
+  <% @list_of_plants.each do |a_plant| %>
+    <div class="col-md-4 mb-5">
+    <div class="card border-dark mb-3" id = "<%=a_plant.id%>">
+      <div class="card-header">
+        <h4 class="card-title"><a href="/plants/<%= a_plant.id %>"><%= a_plant.name %></a></h4>
       </div>
 
-      <%else%>
-      <%the_id = my_garden.where({:plant_id => a_plant.id}).first.id%>
+      <a href="/plants/<%= a_plant.id %>"><img src=<%= a_plant.image_url %> class="card-img-top"></a>
 
-      <div class="col">
-      <form action="/delete_garden/<%=the_id%>">
-        <button>
-          Delete from my garden
-        </button>
-      </form>
+      <div class="card-body">
+        <%if @current_user.present?%>
+          <%my_garden = @current_user.gardens%>
+          <%if my_garden.where({:plant_id => a_plant.id}).count == 0%>
+            <form action="/insert_garden" method="post">
+              <input type="hidden" name="query_plant_id" value = <%= a_plant.id %>>
+              <button class="btn btn-outline-success">Add to my garden!</button>
+            </form>
+          <%else%>
+            <%the_id = my_garden.where({:plant_id => a_plant.id}).first.id%>
+            <a href="/delete_garden/<%=the_id%>" class="btn btn-outline-danger">Remove</a>
+          <%end%>
+        <%end%>
       </div>
-      <%end%>
-      <%end%>
-      </div>
-
-        <div class="row">
-          <a href="/plants/<%= a_plant.id %>"><img src=<%= a_plant.image_url %> alt=<%= a_plant.name %>></a>
-        </div>
-      </div>
-      <% end %>
-  </div>
-</div> 
+    </div>
+    </div>
+  <%end%>
 </div>
-
-<hr>

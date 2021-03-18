@@ -2,30 +2,30 @@
 
 <form action="/insert_user" method="post">
 
-  <div>
+  <div class="form-group">
     <label for="email_box">Email</label>
-    <input id="email_box" name="query_email" placeholder="Choose a email..." type="text">
+    <input id="email_box" class="form-control" name="query_email" placeholder="Choose a email..." type="text">
+    <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
   </div>
          
   <div>
     <label for="last_frost_box">Your garden's last frost date</label>
       
-    <input type="date" id="last_frost_box" name="query_last_frost">
+    <input type="date" id="last_frost_box" class="form-control" name="query_last_frost">
   </div>
     
   <div>
     <label for="password_box">Password</label>
-    <input id="password_box" name="query_password" placeholder="Choose a password..." type="password">
+    <input id="password_box" class="form-control" name="query_password" placeholder="Choose a password..." type="password">
   </div>
 
   <div>
     <label for="password_confirmation_box">Password Confirmation</label>
-    <input id="password_confirmation_box" name="query_password_confirmation" placeholder="Confirm your password..." type="password">
+    <input id="password_confirmation_box" class="form-control mb-2" name="query_password_confirmation" placeholder="Confirm your password..." type="password">
   </div>
 
-  <button>
-    Sign up
-  </button>
+  <button type="submit" class="btn btn-primary">Submit</button>
+  
 </form>
 
 <hr>
