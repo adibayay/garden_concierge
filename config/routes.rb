@@ -6,38 +6,38 @@ Rails.application.routes.draw do
   # Routes for the Companion resource:
 
   # CREATE
-  post("/insert_companion", { :controller => "companions", :action => "create" })
+  # post("/insert_companion", { :controller => "companions", :action => "create" })
           
   # READ
-  get("/companions", { :controller => "companions", :action => "index" })
+  # get("/companions", { :controller => "companions", :action => "index" })
   
-  get("/companions/:path_id", { :controller => "companions", :action => "show" })
+  # get("/companions/:path_id", { :controller => "companions", :action => "show" })
   
   # UPDATE
   
-  post("/modify_companion/:path_id", { :controller => "companions", :action => "update" })
+  # post("/modify_companion/:path_id", { :controller => "companions", :action => "update" })
   
   # DELETE
-  get("/delete_companion/:path_id", { :controller => "companions", :action => "destroy" })
+  # get("/delete_companion/:path_id", { :controller => "companions", :action => "destroy" })
 
   #------------------------------
 
   # Routes for the Grow date resource:
 
   # CREATE
-  post("/insert_grow_date", { :controller => "grow_dates", :action => "create" })
+  # post("/insert_grow_date", { :controller => "grow_dates", :action => "create" })
           
   # READ
   get("/grow_dates", { :controller => "grow_dates", :action => "index" })
   
-  get("/grow_dates/:path_id", { :controller => "grow_dates", :action => "show" })
+  # get("/grow_dates/:path_id", { :controller => "grow_dates", :action => "show" })
   
   # UPDATE
   
-  post("/modify_grow_date/:path_id", { :controller => "grow_dates", :action => "update" })
+  # post("/modify_grow_date/:path_id", { :controller => "grow_dates", :action => "update" })
   
   # DELETE
-  get("/delete_grow_date/:path_id", { :controller => "grow_dates", :action => "destroy" })
+  # get("/delete_grow_date/:path_id", { :controller => "grow_dates", :action => "destroy" })
 
   #------------------------------
 
@@ -49,11 +49,11 @@ Rails.application.routes.draw do
   # READ
   get("/gardens", { :controller => "gardens", :action => "index" })
   
-  get("/gardens/:path_id", { :controller => "gardens", :action => "show" })
+  # get("/gardens/:path_id", { :controller => "gardens", :action => "show" })
   
   # UPDATE
   
-  post("/modify_garden/:path_id", { :controller => "gardens", :action => "update" })
+  # post("/modify_garden/:path_id", { :controller => "gardens", :action => "update" })
   
   # DELETE
   get("/delete_garden/:path_id", { :controller => "gardens", :action => "destroy" })
@@ -63,7 +63,7 @@ Rails.application.routes.draw do
   # Routes for the Plant resource:
 
   # CREATE
-  post("/insert_plant", { :controller => "plants", :action => "create" })
+  # post("/insert_plant", { :controller => "plants", :action => "create" })
           
   # READ
   get("/plants", { :controller => "plants", :action => "index" })
@@ -75,7 +75,7 @@ Rails.application.routes.draw do
   post("/modify_plant/:path_id", { :controller => "plants", :action => "update" })
   
   # DELETE
-  get("/delete_plant/:path_id", { :controller => "plants", :action => "destroy" })
+  # get("/delete_plant/:path_id", { :controller => "plants", :action => "destroy" })
 
   #------------------------------
 
@@ -92,7 +92,7 @@ Rails.application.routes.draw do
   post("/modify_user", { :controller => "user_authentication", :action => "update" })
   
   # DELETE RECORD
-  get("/cancel_user_account", { :controller => "user_authentication", :action => "destroy" })
+  # get("/cancel_user_account", { :controller => "user_authentication", :action => "destroy" })
 
   # ------------------------------
 
